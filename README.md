@@ -1,6 +1,6 @@
 # 协议板USB通信接口协议
 ## 1 通信接口与传输方式
-本协议板 USB 接口采用 USB 2.0 Full-Speed，工作于 Device 模式，USB 设备类为 CDC ACM。上位机可将其识别为虚拟串口，并通过该接口与协议板进行通信。
+USB 2.0 Full-Speed Device，CDC
 
 ## 2 协议说明
 ### 2.1 协议帧格式
