@@ -1,4 +1,4 @@
-# 协议板USB通信协议
+# 协议板USB接口应用说明
 ## 1 通信接口
 USB 2.0 Full-Speed Device，CDC Class
 
