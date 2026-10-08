@@ -1,4 +1,4 @@
-# 协议板USB接口应用说明
+# 协议板 USB 接口应用说明
 ## 1 通信接口
 USB 2.0 Full-Speed Device，CDC Class
 
@@ -8,4 +8,4 @@ USB 2.0 Full-Speed Device，CDC Class
 |:---:|---|---|---|
 | 0 | `SOF` | 2 Byte | 帧头，固定为0xB4、0x7B，先发0xB4，后发0x7B |
 | 2 | `MsgType` | 1 Byte | 消息类型：CMD、EVENT、ACK |
-| 3 | `Msg`
+| 3 | `MsgID` | 1 Byte | 消息
