@@ -46,4 +46,4 @@ MsgID 是消息发起者维护的一个滚动计数器
 | `CMD` | `0x00` | Host -> Device | 下发命令 |
 | `EVENT` | `0x01` | Device -> Host | 异步执行结果或者异步事件上报 |
 | `ACK` | `0x02` | 双向 | 命令/事件接收、校验及受理结果 |
-| `Reserved` | `0x03~0xFF` | NA | Reserved |
+| Reserved | `0x03~0xFF` | NA | Reserved |
