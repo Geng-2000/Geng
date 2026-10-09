@@ -18,7 +18,7 @@ USB 2.0 Full-Speed Device，CDC Class
 
 ### 2.2 字段定义
 #### 2.2.1 SOF 定义
-Start of Frame‌，帧头，固定为 0xB4、0x7B，发送时先发 0xB4，后发 0x7B。
+Start of Frame‌，帧头，固定为 0xB4、0x7B，发送时先发 0xB4，后发 0x7B。<br>
 用于定位帧起点，可帮助消息接收者在遇到拆包、粘包或者通信异常等问题后重新同步。
 
 #### 2.2.2 MsgID 定义
