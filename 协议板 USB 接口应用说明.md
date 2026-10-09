@@ -12,7 +12,7 @@ USB 2.0 Full-Speed Device，CDC Class
 | 3 | `MsgType` | 1 Byte | 消息类型<br>`0x00`: CMD<br>`0x01`: EVENT<br>`0x02`: ACK<br>`0x03~0xFF`: Reserved |
 | 4 | `MsgCode` | 1 Byte | `MsgType = CMD`: MsgCode 表示命令码<br>`MsgType = EVENT`: MsgCode 表示事件码<br>`MsgType = ACK`: MsgCode 表示被确认的原始命令码/事件码 |
 | 5 | `Flags` | 1 Byte | 标志位 |
-| 6 | `DataLen` | 2 Byte | 业务数据长度，小端序 |
+| 6 | `DataLen` | 2 Byte | 业务数据长度，单位：byte，小端序 |
 | 8 | `Data` | N Byte | 业务数据 |
 | 8 + N | `CRC16` | 2 Byte | 从 MsgID 到 Data 最后一个字节的 CRC16 校验值，小端序 |
 
