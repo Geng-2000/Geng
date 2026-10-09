@@ -7,5 +7,5 @@ USB 2.0 Full-Speed Device，CDC Class
 | Offset | Field | Size | Description |
 |:---:|---|---|---|
 | 0 | `SOF` | 2 Byte | 帧头，固定为0xB4、0x7B，先发0xB4，后发0x7B |
-| 2 | `MsgType` | 1 Byte | 消息类型：CMD、EVENT、ACK<br>`0x00`: CMD<br>`0x01`: EVENT<br>`0x00`: ACK |
+| 2 | `MsgType` | 1 Byte | 消息类型<br>`0x00`: CMD<br>`0x01`: EVENT<br>`0x00`: ACK |
 | 3 | `MsgID` | 1 Byte | MsgType=CMD：命令码<br>MsgType=EVENT：事件码<br>MsgType=ACK：被确认的原始命令码/事件码 |
