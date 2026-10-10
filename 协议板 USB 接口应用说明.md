@@ -10,7 +10,7 @@ USB 2.0 Full-Speed Device，CDC Class
 | 0 | `SOF` | 2 Byte | 帧头，固定为`0xB4`、`0x7B`，先发`0xB4`，后发`0x7B` |
 | 2 | `MsgID` | 1 Byte | 由消息发起者维护的滚动计数器，消息接收者回复 ACK 时与其跟随 |
 | 3 | `MsgType` | 1 Byte | 消息类型<br>`0x00`: CMD<br>`0x01`: EVENT<br>`0x02`: ACK<br>`0x03~0xFF`: Reserved |
-| 4 | `MsgCode` | 1 Byte | 当`MsgType = CMD`时: MsgCode 表示命令码<br>单`MsgType = EVENT`时: MsgCode 表示事件码<br>当`MsgType = ACK`时: MsgCode 表示被确认的原始命令码/事件码 |
+| 4 | `MsgCode` | 1 Byte | 当`MsgType = CMD`时: MsgCode 表示命令码<br>当`MsgType = EVENT`时: MsgCode 表示事件码<br>当`MsgType = ACK`时: MsgCode 表示被确认的原始命令码/事件码 |
 | 5 | `Flags` | 1 Byte | 标志位 |
 | 6 | `DataLen` | 2 Byte | 业务数据长度，单位：byte，小端序 |
 | 8 | `Data` | N Byte | 业务数据 |
@@ -19,7 +19,7 @@ USB 2.0 Full-Speed Device，CDC Class
 ### 2.2 字段定义
 #### 2.2.1 SOF 定义
 Start of Frame‌，帧头，固定为 0xB4、0x7B，发送时先发 0xB4，后发 0x7B。<br>
-用于定位帧起点，可帮助消息接收者在遇到拆包、粘包或者通信异常等问题后重新同步。
+用于在连续字节流中定位帧起点，消息接收者可将帧头用于处理拆包和粘包或者用于通信异常后的重新同步。
 
 #### 2.2.2 MsgID 定义
 MsgID 是由消息发起者维护的滚动计数器，主机与从机各自维护一个 MsgID，两者之间互不影响
