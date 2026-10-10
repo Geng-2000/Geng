@@ -10,7 +10,7 @@ USB 2.0 Full-Speed Device，CDC Class
 | 0 | `SOF` | 2 Byte | 帧头，固定为`0xB4`、`0x7B`，先发`0xB4`，后发`0x7B` |
 | 2 | `MsgID` | 1 Byte | 由消息发起者维护的滚动计数器，消息接收者回复 ACK 时与其跟随 |
 | 3 | `MsgType` | 1 Byte | 消息类型<br>`0x00`: CMD<br>`0x01`: EVENT<br>`0x02`: ACK<br>`0x03~0xFF`: Reserved |
-| 4 | `MsgCode` | 1 Byte | `MsgType = CMD`: MsgCode 表示命令码<br>`MsgType = EVENT`: MsgCode 表示事件码<br>`MsgType = ACK`: MsgCode 表示被确认的原始命令码/事件码 |
+| 4 | `MsgCode` | 1 Byte | 当`MsgType = CMD`时: MsgCode 表示命令码<br>单`MsgType = EVENT`时: MsgCode 表示事件码<br>当`MsgType = ACK`时: MsgCode 表示被确认的原始命令码/事件码 |
 | 5 | `Flags` | 1 Byte | 标志位 |
 | 6 | `DataLen` | 2 Byte | 业务数据长度，单位：byte，小端序 |
 | 8 | `Data` | N Byte | 业务数据 |
@@ -47,6 +47,17 @@ MsgID 是由消息发起者维护的滚动计数器，主机与从机各自维�
 | `EVENT` | `0x01` | Device -> Host | 异步执行结果或者异步事件上报 |
 | `ACK` | `0x02` | 双向 | 命令/事件接收、校验及受理结果 |
 | Reserved | `0x03~0xFF` | NA | Reserved |
+
+基本交互关系如下: 
+```
+Host                                    Device
+ │                                         │
+ │──────── CMD ───────────────────────────>│
+ │<─────────────────────────── ACK ────────│
+ │                                         │异步执行(如有)
+ │<────────────────────────── EVENT ───────│
+ │──────── ACK ───────────────────────────>│
+```
 
 #### 2.2.4 MsgCode 定义
 
