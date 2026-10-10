@@ -71,8 +71,8 @@ Host                                    Device
 
 #### 2.2.4 MsgCode 定义
 MsgCode 的含义由消息的 MsgID 决定。
-- 当`MsgType = CMD`时：MsgCode 表示命令码
-- 当`MsgType = EVENT`时：MsgCode 表示事件码
+- 当`MsgType = CMD`时：MsgCode 表示命令码，命令码的具体定义见后续章节
+- 当`MsgType = EVENT`时：MsgCode 表示事件码，事件码的具体定义见后续章节
 - 当`MsgType = ACK`时：MsgCode 表示被确认的原始命令码/事件码
 
 #### 2.2.5 Flags 定义
