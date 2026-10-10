@@ -6,7 +6,7 @@ USB 2.0 Full-Speed Device，CDC Class
 ## 2 协议说明
 ### 2.1 消息帧格式
 | Offset | Field | Size | Description |
-|:---:|---|---|---|
+|---|---|---|---|
 | `0` | `SOF` | 2 Byte | 帧头，固定为`0xB4`、`0x7B`，先发`0xB4`，后发`0x7B` |
 | `2` | `MsgID` | 1 Byte | 由消息发起者维护的滚动计数器，消息接收者回复 ACK 时回填相同的 MsgID |
 | `3` | `MsgType` | 1 Byte | 消息类型<br>`0x00`: CMD<br>`0x01`: EVENT<br>`0x02`: ACK<br>`0x03…0xFF`: Reserved |
@@ -45,7 +45,7 @@ MsgID 是由消息发起者维护的滚动计数器，主机与从机各自维�
 
 #### 2.2.3 MsgType 定义
 | MsgType | Value | Direction | Description |
-|---|:---:|:---:|---|
+|---|---|:---:|---|
 | `CMD` | `0x00` | Host -> Device | 下发命令 |
 | `EVENT` | `0x01` | Device -> Host | 异步执行结果或者异步事件上报 |
 | `ACK` | `0x02` | 双向 | 命令/事件接收、校验及受理结果 |
@@ -78,7 +78,7 @@ MsgCode 的含义由消息的 MsgID 决定。
 
 #### 2.2.5 Flags 定义
 | Bit(s) | Field | Description |
-|:---:|---|---|
+|---|---|---|
 | `B0` | `ACK_Required` | 当前消息是否需要对方回复ACK<br>0 = 不需要<br>1 = 需要 |
 | `B1` | `Retransmit` | 当前消息是否为重传消息<br>0 = 否<br>1 = 是 |
 | `B2…7` | `Reserved` | Reserved - 应设为0 |
