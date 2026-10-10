@@ -78,7 +78,7 @@ MsgCode 的含义由消息的 MsgID 决定。
 
 #### 2.2.5 Flags 定义
 | Bit(s) | Field | Description |
-|---|---|---|
+|:---:|---|---|
 | `B0` | `ACK_Required` | 当前消息是否需要对方回复ACK<br>0 = 不需要<br>1 = 需要 |
 | `B1` | `Retransmit` | 当前消息是否为重传消息<br>0 = 否<br>1 = 是 |
 | `B2…7` | `Reserved` | Reserved - 应设为0 |
