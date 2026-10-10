@@ -48,7 +48,7 @@ MsgID 是由消息发起者维护的滚动计数器，主机与从机各自维�
 | `CMD` | `0x00` | Host -> Device | 下发命令 |
 | `EVENT` | `0x01` | Device -> Host | 异步执行结果或者异步事件上报 |
 | `ACK` | `0x02` | 双向 | 命令/事件接收、校验及受理结果 |
-| Reserved | `0x03…0xFF` | NA | Reserved-不得使用 |
+| Reserved | `0x03…0xFF` | NA | Reserved - 不得使用 |
 
 基本交互关系如下: 
 ```
@@ -80,7 +80,7 @@ MsgCode 的含义由消息的 MsgID 决定。
 |---|---|---|
 | B0 | `ACK_Required` | 当前消息是否需要对方回复ACK<br>0 = 不需要<br>1 = 需要 |
 | B1 | `Retransmit` | 当前消息是否为重传消息<br>0 = 否<br>1 = 是 |
-| B2…7 | Reserved | Reserved-应设为0 |
+| B2…7 | Reserved | Reserved - 应设为0 |
 #### 2.2.6 DataLen 定义
 
 #### 2.2.7 Data 定义
