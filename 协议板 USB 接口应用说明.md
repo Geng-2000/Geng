@@ -10,7 +10,7 @@ USB 2.0 Full-Speed Device，CDC Class
 | 0 | `SOF` | 2 Byte | 帧头，固定为`0xB4`、`0x7B`，先发`0xB4`，后发`0x7B` |
 | 2 | `MsgID` | 1 Byte | 由消息发起者维护的滚动计数器，消息接收者回复 ACK 时与其跟随 |
 | 3 | `MsgType` | 1 Byte | 消息类型<br>`0x00`: CMD<br>`0x01`: EVENT<br>`0x02`: ACK<br>`0x03~0xFF`: Reserved |
-| 4 | `MsgCode` | 1 Byte | 当`MsgType = CMD`时: MsgCode 表示命令码<br>当`MsgType = EVENT`时: MsgCode 表示事件码<br>当`MsgType = ACK`时: MsgCode 表示被确认的原始命令码/事件码 |
+| 4 | `MsgCode` | 1 Byte | 当`MsgType = CMD`时：MsgCode 表示命令码<br>当`MsgType = EVENT`时：MsgCode 表示事件码<br>当`MsgType = ACK`时：MsgCode 表示被确认的原始命令码/事件码 |
 | 5 | `Flags` | 1 Byte | 标志位 |
 | 6 | `DataLen` | 2 Byte | 业务数据长度，单位：byte，小端序 |
 | 8 | `Data` | N Byte | 业务数据 |
@@ -24,11 +24,11 @@ Start of Frame‌，帧头，固定为 0xB4、0x7B，发送时先发 0xB4，后�
 #### 2.2.2 MsgID 定义
 MsgID 是由消息发起者维护的滚动计数器，主机与从机各自维护一个独立的 MsgID，发送消息时分配新的 MsgID，ACK 不产生新的 MsgID。
 ```
-取值范围: 0x00 ~ 0xFF
-初始值: 0x00
-回绕规则: 0xFF 的下一值为 0x00
+取值范围：0x00 ~ 0xFF
+初始值：0x00
+回绕规则：0xFF 的下一值为 0x00
 ```
-可分以下两种情况:
+可分以下两种情况：
 
 (1) 主机发送给从机的消息（ACK 除外）
 - 主机单独维护一个 MsgID
