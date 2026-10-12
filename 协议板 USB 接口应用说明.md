@@ -50,7 +50,7 @@ MsgID 是由消息发起者维护的滚动计数器，主机与从机各自维�
 | `ACK` | `0x02` | 双向 | 命令/事件接收、校验及受理结果 |
 | `Reserved` | `0x03…0xFF` | NA | Reserved - 不得使用 |
 
-基本交互关系如下: 
+基本交互如下: 
 ```
 主机下发命令
 Host                                    Device
@@ -110,7 +110,24 @@ MsgCode = EVENT_XX //回填相同的 MsgCode
 | `B2…7` | `Reserved` | Reserved - 应设为0 |
 
 #### 2.2.6 DataLen 定义
+Data 字段的长度，单位为 byte，占用两个字节，小端序。
 
 #### 2.2.7 Data 定义
+具体的业务数据，具体定义见后续章节。
 
 #### 2.2.8 CRC16 定义
+从 MsgID 到 Data 最后一个字节的 CRC16 校验值，多项式为：X16+X15+X2+1(0x8005)，占用两个字节，小端序。
+代码示例：
+```
+uint16_t crc16(uint8_t *data, uint16_t len) {
+    uint16_t crc = 0xFFFF;
+    for(uint16_t i=0; i<len; i++){
+        crc ^= data[i];
+        for(uint8_t j=0; j<8; j++){
+            if(crc & 0x0001) crc = (crc>>1) ^ 0xA001;
+            else crc >>= 1;
+        }
+    }
+    return crc;
+}
+```
