@@ -74,6 +74,23 @@ MsgCode 的含义由消息的 MsgID 决定。
 - 当`MsgType = CMD`时：MsgCode 表示命令码，命令码的具体定义见后续章节
 - 当`MsgType = EVENT`时：MsgCode 表示事件码，事件码的具体定义见后续章节
 - 当`MsgType = ACK`时：MsgCode 表示被确认的原始命令码/事件码
+示例：
+```
+主机下发命令 Host -> Device:
+MsgID = 0x01
+MsgType = CMD
+MsgCode = CMD_XX
+
+从机回复ACK Device -> Host:
+MsgID = 0x01
+MsgType = ACK
+MsgCode = CMD_XX
+
+从机返回异步执行结果 Device -> Host:
+MsgID = 0x00
+MsgType = EVENT
+MsgCode = EVENT_XX
+```
 
 #### 2.2.5 Flags 定义
 | Bit(s) | Field | Description |
