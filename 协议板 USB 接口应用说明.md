@@ -78,7 +78,7 @@ MsgCode 的含义由消息的 MsgID 决定。
 示例：
 ```
 主机下发命令 Host -> Device:
-MsgID = 0x01
+MsgID = 0x01（由主机维护的 MsgID）
 MsgType = CMD
 MsgCode = CMD_XX
 
@@ -88,7 +88,7 @@ MsgType = ACK
 MsgCode = CMD_XX（回填相同 MsgCode）
 
 从机返回异步执行结果 Device -> Host:
-MsgID = 0x00
+MsgID = 0x00（由从机维护的 MsgID）
 MsgType = EVENT
 MsgCode = EVENT_XX
 ```
