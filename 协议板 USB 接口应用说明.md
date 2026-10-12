@@ -83,9 +83,9 @@ MsgType = CMD
 MsgCode = CMD_XX
 
 从机回复ACK Device -> Host:
-MsgID = 0x01（回填相同 MsgID）
+MsgID = 0x01（回填相同的 MsgID）
 MsgType = ACK
-MsgCode = CMD_XX（回填相同 MsgCode）
+MsgCode = CMD_XX（回填相同的 MsgCode）
 
 从机返回异步执行结果 Device -> Host:
 MsgID = 0x00（由从机维护的 MsgID）
