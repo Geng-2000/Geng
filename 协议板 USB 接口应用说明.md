@@ -109,6 +109,10 @@ MsgCode = EVENT_XX //回填相同的 MsgCode
 | `B1` | `Retransmit` | 当前消息是否为重传消息<br>0 = 否<br>1 = 是 |
 | `B2…7` | `Reserved` | Reserved - 应设为0 |
 
+规则：
+- CMD 消息 ACK_Required 必须设为1，所有 CMD 均默认需要从机回复 ACK
+- 
+
 #### 2.2.6 DataLen 定义
 Data 字段的长度，单位为 byte，占用两个字节，小端序。
 
