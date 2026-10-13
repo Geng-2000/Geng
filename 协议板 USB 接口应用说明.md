@@ -14,7 +14,7 @@ USB 2.0 Full-Speed Device，CDC Class
 | `5` | `Flags` | 1 Byte | 标志位 |
 | `6` | `DataLen` | 2 Byte | 业务数据长度，单位：byte，小端序 |
 | `8` | `Data` | N Byte | 业务数据 |
-| `8 + N` | `CRC16` | 2 Byte | 从 MsgID 到 Data 最后一个字节的 CRC16 校验值，小端序 |
+| `8 + N` | `CRC16` | 2 Byte | 从 MsgID 到 Data 最后一个字节的 CRC-16/CCITT-FALSE 校验值，小端序 |
 
 ### 2.2 字段定义
 #### 2.2.1 SOF 定义
@@ -116,17 +116,17 @@ Data 字段的长度，单位为 byte，占用两个字节，小端序。
 业务数据，具体定义见后续章节。
 
 #### 2.2.8 CRC16 定义
-从 MsgID 到 Data 最后一个字节的 CRC16 校验值，占用两个字节，小端序。
+从 MsgID 到 Data 最后一个字节的 CRC-16/CCITT-FALSE 校验值，占用两个字节，小端序。
 
 代码示例：
 ```c
-uint16_t crc16(uint8_t *data, uint16_t len) {
+uint16_t crc16(uint8_t* data, uint16_t len) {
     uint16_t crc = 0xFFFF;
-    for(uint16_t i=0; i<len; i++){
-        crc ^= data[i];
-        for(uint8_t j=0; j<8; j++){
-            if(crc & 0x0001) crc = (crc>>1) ^ 0xA001;
-            else crc >>= 1;
+    for (uint16_t i = 0; i < len; i++) {
+        crc ^= (uint16_t)data[i] << 8;
+        for (uint8_t j = 0; j < 8; j++) {
+            if (crc & 0x8000) crc = (crc << 1) ^ 0x1021;
+            else crc <<= 1;
         }
     }
     return crc;
