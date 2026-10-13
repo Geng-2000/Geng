@@ -120,7 +120,7 @@ Data 字段的长度，单位为 byte，占用两个字节，小端序。
 
 代码示例：
 ```c
-uint16_t crc16(uint8_t* data, uint16_t len) {
+uint16_t crc16(const uint8_t* data, uint16_t len) {
     uint16_t crc = 0xFFFF;
     for (uint16_t i = 0; i < len; i++) {
         crc ^= (uint16_t)data[i] << 8;
