@@ -77,6 +77,7 @@ MsgCode 的含义由消息的 MsgType 决定。
 
 示例：
 ```
+---
 主机下发命令：
 Host -> Device
 MsgID = 0x01 //由主机维护的 MsgID
@@ -88,7 +89,9 @@ Device -> Host
 MsgID = 0x01 //回填相同的 MsgID
 MsgType = ACK
 MsgCode = CMD_XX //回填相同的 MsgCode
+---
 
+---
 从机返回异步执行结果：
 Device -> Host
 MsgID = 0x00 //由从机维护的 MsgID
@@ -100,6 +103,7 @@ Host -> Device
 MsgID = 0x00 //回填相同的 MsgID
 MsgType = ACK
 MsgCode = EVENT_XX //回填相同的 MsgCode
+---
 ```
 
 #### 2.2.5 Flags 定义
