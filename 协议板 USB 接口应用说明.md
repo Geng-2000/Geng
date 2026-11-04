@@ -119,13 +119,15 @@ MsgCode = EVENT_XX //回填相同的 MsgCode
 - 非重传消息的 Retransmit 必须设为0
 - 重传消息的 Retransmit 必须置1，且应保持 MsgID 不变
 
-#### 2.2.6 DataLen 定义
+#### 2.2.6 ACK_Flags 定义
+
+#### 2.2.7 DataLen 定义
 Data 字段的长度，单位为 byte，占用两个字节，小端序。
 
-#### 2.2.7 Data 定义
+#### 2.2.8 Data 定义
 业务数据，具体定义见后续章节。
 
-#### 2.2.8 CRC16 定义
+#### 2.2.9 CRC16 定义
 从 MsgID 到 Data 最后一个字节的 CRC-16/CCITT-FALSE 校验值，占用两个字节，小端序。
 
 代码示例：
