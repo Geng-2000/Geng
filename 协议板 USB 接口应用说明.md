@@ -45,8 +45,8 @@ MsgID 是由消息发起者维护的滚动计数器，主机与从机各自维�
 #### 2.2.3 MsgType 定义
 | MsgType | Value | Direction | Description |
 |---|---|:---:|---|
-| `CMD` | `0x00` | Host -> Device | 下发命令 |
-| `EVENT` | `0x01` | Device -> Host | 异步执行结果或者异步事件上报 |
+| `CMD` | `0x00` | Host → Device | 下发命令 |
+| `EVENT` | `0x01` | Device → Host | 异步执行结果或者异步事件上报 |
 | `ACK` | `0x02` | 双向 | 命令/事件接收、校验及受理结果 |
 | `Reserved` | `0x03…0xFF` | NA | Reserved - 不得使用 |
 
@@ -78,26 +78,26 @@ MsgCode 的含义由消息的 MsgType 决定。
 示例：
 ```
 主机下发命令：
-Host -> Device
+Host → Device
 MsgID = 0x06 //由主机维护的 MsgID
 MsgType = CMD
 MsgCode = CMD_XX
 
 从机回复ACK：
-Device -> Host
+Device → Host
 MsgID = 0x06 //回填相同的 MsgID
 MsgType = ACK
 MsgCode = CMD_XX //回填相同的 MsgCode
 ```
 ```
 从机返回异步执行结果：
-Device -> Host
+Device → Host
 MsgID = 0x00 //由从机维护的 MsgID
 MsgType = EVENT
 MsgCode = EVENT_XX
 
 主机回复ACK：
-Host -> Device
+Host → Device
 MsgID = 0x00 //回填相同的 MsgID
 MsgType = ACK
 MsgCode = EVENT_XX //回填相同的 MsgCode
