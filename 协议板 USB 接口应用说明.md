@@ -8,7 +8,7 @@ USB 2.0 Full-Speed Device，CDC Class
 | Offset | Field | Size | Description |
 |---|---|---|---|
 | `0` | `SOF` | 2 Byte | 帧头，固定为`0xB4`、`0x7B`，先发`0xB4`，后发`0x7B` |
-| `2` | `MsgID` | 1 Byte | 由消息发起者维护的滚动计数器，消息接收者回复 ACK 时回填相同的 MsgID |
+| `2` | `MsgID` | 1 Byte | 由消息发起者维护的滚动计数器 |
 | `3` | `MsgType` | 1 Byte | `0x00`= CMD<br>`0x01`= EVENT<br>`0x02`= ACK<br>`0x03…0xFF`= Reserved |
 | `4` | `MsgCode` | 1 Byte | `MsgType = CMD`：MsgCode 表示命令码<br>`MsgType = EVENT`：MsgCode 表示事件码<br>`MsgType = ACK`：MsgCode 表示被确认的原始命令码/事件码 |
 | `5` | `Flags/ACK_Flags` | 1 Byte | `MsgType != ACK`：该字段为 Flags<br>`MsgType = ACK`：该字段为 ACK_Flags |
@@ -19,15 +19,15 @@ USB 2.0 Full-Speed Device，CDC Class
 ### 2.2 字段定义
 #### 2.2.1 SOF 定义
 帧头，固定为`0xB4`、`0x7B`，先发`0xB4`，后发`0x7B`<br>
-用于在连续字节流中定位帧起点，消息接收者可将帧头用于处理拆包、粘包等情况以及用于发生通信异常后的重新同步。
+用于在连续字节流中定位帧起点。消息接收者应将 SOF 用于拆包、粘包处理以及通信异常后的重新同步。
 
 #### 2.2.2 MsgID 定义
-- 主机和从机单独维护一个 MsgID
-- 主机和从机开机或者重启后发送的第一条消息的 MsgID 必须为 0x00
-- 发送新消息时，除 ACK 外，需要分配新的 MsgID，变化规则为：MsgID++，其中 0xFF 的下一值为 0x00
-- 特殊情况下，如设备重启，消息接收者需要能够正常处理非连续变化的 MsgID 的消息
-- 设备重传同一条消息时，应保持 MsgID 不变
-- 消息接收者收到消息若需回复 ACK 时，应填写所回复消息的原始 MsgID
+- 主机和从机各自独立维护一个 MsgID 计数器
+- 主机和从机开机或者重启后发送的第一条消息的 MsgID 必须为 `0x00`
+- 发送新消息时，除 ACK 外，需要分配新的 MsgID，变化规则为 `MsgID++`，其中 `0xFF` 的下一值为 `0x00`
+- 设备重启等特殊情况下，消息接收者需要能够正常处理非连续变化的 MsgID
+- 设备重传同一条消息时，应保持 MsgID 不变，
+- 消息接收者回复 ACK 时，ACK 中的 MsgID 字段应回填所回复消息的原始 MsgID
 
 #### 2.2.3 MsgType 定义
 | MsgType | Value | Direction | Description |
@@ -37,22 +37,38 @@ USB 2.0 Full-Speed Device，CDC Class
 | `ACK` | `0x02` | 双向 | 命令/事件接收、校验及受理结果 |
 | `Reserved` | `0x03…0xFF` | NA | Reserved - 暂未启用 |
 
-示例: 
+典型交互关系: 
 ```
-主机下发命令
+方式1：主机下发 CMD，从机立即完成并 ACK
 Host                                    Device
  │                                         │
  │──────── CMD ───────────────────────────>│
  │<─────────────────────────── ACK ────────│
- │                                         │异步执行（如有）
- │<────────────────────────── EVENT ───────│
- │──────── ACK ───────────────────────────>│
 ```
+
 ```
-从机异步事件上报
+方式2：主机下发 CMD，从机先 ACK 表示受理，完成后 EVENT 上报结果，主机再 ACK
 Host                                    Device
  │                                         │
- │<────────────────────────── EVENT ───────│
+ │──────── CMD ───────────────────────────>│
+ │<─────────────────────────── ACK ────────│
+ │                                         │异步执行
+ │<────────────────────────── EVENT ───────│（Flags.ACK_Required = 1，需要回复ACK）
+ │──────── ACK ───────────────────────────>│
+```
+
+```
+方式3：从机上报非关键异步事件，主机不需要 ACK
+Host                                    Device
+ │                                         │
+ │<────────────────────────── EVENT ───────│（Flags.ACK_Required = 0，不需要回复ACK）
+```
+
+```
+方式4：从机上报关键异步事件，主机 ACK
+Host                                    Device
+ │                                         │
+ │<────────────────────────── EVENT ───────│（Flags.ACK_Required = 1，需要回复ACK）
  │──────── ACK ───────────────────────────>│
 ```
 
