@@ -26,7 +26,7 @@ USB 2.0 Full-Speed Device，CDC Class
 - 主机和从机开机或者重启后发送的第一条消息的 MsgID 必须为 `0x00`
 - 发送新消息时，除 ACK 外，需要分配新的 MsgID，变化规则为 `MsgID++`，其中 `0xFF` 的下一值为 `0x00`
 - 设备重启等特殊情况下，消息接收者需要能够正常处理非连续变化的 MsgID
-- 设备重传同一条消息时，应保持 MsgID 不变，
+- 设备重传同一条消息时，应保持 MsgID 不变，并将Flags.Retransmit 置1
 - 消息接收者回复 ACK 时，ACK 中的 MsgID 字段应回填所回复消息的原始 MsgID
 
 #### 2.2.3 MsgType 定义
