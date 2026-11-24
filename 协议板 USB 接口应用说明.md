@@ -27,7 +27,7 @@ USB 2.0 Full-Speed Device，CDC Class
 - 发送新消息时，除 ACK 外，需要分配新的 MsgID，变化规则为 `MsgID++`，其中 `0xFF` 的下一值为 `0x00`
 - 消息接收者需要能够正常处理非连续变化的 MsgID，以应对设备重启等特殊情况
 - 设备重传同一条消息时，应保持 MsgID 不变，并将Flags.Retransmit 置1
-- ACK不产生新的 MsgID，消息接收者回复 ACK 时，ACK 中的 MsgID 应回填所回复消息的原始 MsgID
+- ACK 不产生新的 MsgID，消息接收者回复 ACK 时，ACK 中的 MsgID 应回填所回复消息的原始 MsgID
 
 #### 2.2.3 MsgType 定义
 | MsgType | Value | Direction | Description |
