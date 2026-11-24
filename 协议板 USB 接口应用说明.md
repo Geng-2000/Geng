@@ -121,9 +121,11 @@ uint16_t crc16(const uint8_t* data, uint16_t len) {
 本文档中涉及多处 Reserved，分为以下两类：
 
 (1) Reserved - 应设为 0
+
 适用于字段中的保留位/保留字节，发送方必须填 0，接收方忽略该值。
 
 (2) Reserved - 暂未启用
+
 适用于预留但当前未定义的取值空间，发送方当前不得使用，接收方收到时回复 ACK_FAILED + ERR_UNSUPPORTED。
 
 ### 2.3 
