@@ -116,8 +116,9 @@ MsgCode = EVENT_XX //回填原始 MsgCode
 - 重传消息的 Retransmit 必须置1，且应保持 MsgID 不变
 
 #### 2.2.6 ACK_Flags 定义（MsgType = ACK）
-
-
+| Bit(s) | Field | Description |
+|---|---|---|
+| `B0` | `ACK_Required` | 当前消息是否需要对方回复ACK<br>0 = 不需要<br>1 = 需要 |
 
 #### 2.2.7 DataLen 定义
 Data长度，单位：byte，小端序。
