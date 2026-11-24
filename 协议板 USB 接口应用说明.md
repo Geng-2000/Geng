@@ -8,7 +8,7 @@ USB 2.0 Full-Speed Device，CDC Class
 | Offset | Field | Size | Description |
 |---|---|---|---|
 | `0` | `SOF` | 2 Byte | 帧头，固定为`0xB4`、`0x7B`，先发`0xB4`，后发`0x7B` |
-| `2` | `MsgID` | 1 Byte | 由消息发起者维护的滚动计数器 |
+| `2` | `MsgID` | 1 Byte | 由发送方维护的滚动计数器 |
 | `3` | `MsgType` | 1 Byte | `0x00`= CMD<br>`0x01`= EVENT<br>`0x02`= ACK<br>`0x03…0xFF`= Reserved |
 | `4` | `MsgCode` | 1 Byte | `MsgType = CMD`：MsgCode 表示命令码<br>`MsgType = EVENT`：MsgCode 表示事件码<br>`MsgType = ACK`：MsgCode 表示被确认的原始命令码/事件码 |
 | `5` | `Flags/ACK_Flags` | 1 Byte | `MsgType != ACK`：该字段为 Flags<br>`MsgType = ACK`：该字段为 ACK_Flags |
@@ -19,15 +19,15 @@ USB 2.0 Full-Speed Device，CDC Class
 ### 2.2 字段定义
 #### 2.2.1 SOF 定义
 帧头，固定为`0xB4`、`0x7B`，先发`0xB4`，后发`0x7B`。
-用于在连续字节流中定位帧起点。消息接收者应将 SOF 用于拆包、粘包处理以及通信异常后的重新同步。
+用于在连续字节流中定位帧起点。接收方应将 SOF 用于拆包、粘包处理以及通信异常后的重新同步。
 
 #### 2.2.2 MsgID 定义
 - 主机和从机各自独立维护一个 MsgID 计数器
 - 主机和从机开机或者重启后发送的第一条消息的 MsgID 必须为 `0x00`
 - 发送新消息时，除 ACK 外，需要分配新的 MsgID，变化规则为 `MsgID++`，其中 `0xFF` 的下一值为 `0x00`
-- 消息接收者需要能够正常处理非连续变化的 MsgID，以应对设备重启等特殊情况
+- 接收方需要能够正常处理非连续变化的 MsgID，以应对设备重启等特殊情况
 - 设备重传同一条消息时，应保持 MsgID 不变，并将Flags.Retransmit 置1
-- ACK 不产生新的 MsgID，消息接收者回复 ACK 时，ACK 中的 MsgID 应回填所回复消息的原始 MsgID
+- ACK 不产生新的 MsgID，接收方回复 ACK 时，ACK 中的 MsgID 应回填所回复消息的原始 MsgID
 
 #### 2.2.3 MsgType 定义
 | MsgType | Value | Direction | Description |
@@ -116,3 +116,8 @@ uint16_t crc16(const uint8_t* data, uint16_t len) {
     return crc;
 }
 ```
+
+#### 2.2.10 Reserved 定义
+全文涉及多处 Reserved，分为以下两类：
+(1) Reserved - 应设为0
+(2) Reserved - 暂未启用
