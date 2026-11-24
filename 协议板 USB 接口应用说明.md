@@ -106,12 +106,13 @@ MsgCode = EVENT_XX //回填原始 MsgCode
 | `B2…7` | `Reserved` | Reserved - 应设为0 |
 
 (1) ACK_Required
-- CMD 的 ACK_Required 必须置1，所有 CMD 均默认需要从机回复 ACK
-- 关键 Event 的 ACK_Required 将会置1，需要主机回复 ACK
-- 非关键 Event 的 ACK_Required 可设为0，不需要主机回复 ACK
+- 主机必须将 CMD 中的 ACK_Required 置1
+- 从机忽略 CMD 中的 ACK_Required，收到的所有 CMD 均回复 ACK
+- 关键 Event 的 ACK_Required 为1，需要主机回复 ACK
+- 非关键 Event 的 ACK_Required 为0，不需要主机回复 ACK
 
 (2) Retransmit
-- 非重传消息的 Retransmit 必须设为0
+- 非重传消息的 Retransmit 必须设0
 - 重传消息的 Retransmit 必须置1，且应保持 MsgID 不变
 
 #### 2.2.6 ACK_Flags 定义（MsgType = ACK）
