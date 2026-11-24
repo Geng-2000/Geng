@@ -79,7 +79,7 @@ Host                                    Device
 
 (1) ACK_Required
 - 主机必须将 CMD 中的 ACK_Required 置1
-- 从机忽略 CMD 中的 ACK_Required，所有 CMD 均回复 ACK
+- 从机忽略 CMD 中的 ACK_Required，所有 CMD 均需要回复 ACK
 - 关键 Event 的 ACK_Required 为1，需要主机回复 ACK
 - 非关键 Event 的 ACK_Required 为0，不需要主机回复 ACK
 
