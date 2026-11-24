@@ -118,7 +118,8 @@ MsgCode = EVENT_XX //回填原始 MsgCode
 #### 2.2.6 ACK_Flags 定义（MsgType = ACK）
 | Bit(s) | Field | Description |
 |---|---|---|
-| `B0` | `ACK_Required` | 当前消息是否需要对方回复ACK<br>0 = 不需要<br>1 = 需要 |
+| `B0…1` | `ACK_Result` | `0B00` = ACK_OK CMD 已受理，且已完成/ EVENT 已处理<br>`0B01` = ACK_ASYNC CMD 已受理，后续通过 EVENT 返回结果<br>`0B10` = ACK_FAILED CMD / EVEVT 已收到，但无法处理|
+| `B2…7` | `Reserved` | Reserved - 应设为0 |
 
 #### 2.2.7 DataLen 定义
 Data长度，单位：byte，小端序。
