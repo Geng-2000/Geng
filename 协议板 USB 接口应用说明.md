@@ -66,37 +66,9 @@ Host                                    Device
 ```
 
 #### 2.2.4 MsgCode 定义
-MsgCode 的具体含义由 MsgType 决定：
 - `MsgType = CMD`：MsgCode 表示命令码，具体定义见后续章节
 - `MsgType = EVENT`：MsgCode 表示事件码，具体定义见后续章节
 - `MsgType = ACK`：MsgCode 表示被确认的原始命令码/事件码
-
-示例：
-```
-主机下发 CMD：
-Host → Device
-MsgID = 0x06 //由主机维护的 MsgID
-MsgType = CMD
-MsgCode = CMD_XX
-
-从机先 ACK 表示受理：
-Device → Host
-MsgID = 0x06 //回填原始 MsgID
-MsgType = ACK
-MsgCode = CMD_XX //回填原始 MsgCode
-
-从机 EVENT 上报结果：
-Device → Host
-MsgID = 0x00 //由从机维护的 MsgID
-MsgType = EVENT
-MsgCode = EVENT_XX
-
-主机 ACK：
-Host → Device
-MsgID = 0x00 //回填原始 MsgID
-MsgType = ACK
-MsgCode = EVENT_XX //回填原始 MsgCode
-```
 
 #### 2.2.5 Flags 定义（MsgType != ACK）
 | Bit(s) | Field | Description |
