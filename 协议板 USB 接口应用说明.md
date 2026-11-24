@@ -90,7 +90,7 @@ Host                                    Device
 #### 2.2.6 ACK_Flags 定义（MsgType = ACK）
 | Bit(s) | Field | Description |
 |---|---|---|
-| `B0…1` | `ACK_Result` | `0B00` = ACK_OK<br>CMD 已受理且已完成 / EVENT 已处理<br><br>`0B01` = ACK_ASYNC<br>CMD 已受理，后续通过 EVENT 返回结果<br><br>`0B10` = ACK_FAILED<br>CMD / EVEVT 已收到，但遇到错误<br><br>`0B11` = Reserved - 暂未启用|
+| `B0…1` | `ACK_Result` | `0B00` = ACK_OK<br>CMD 已受理且已完成 / EVENT 已处理<br><br>`0B01` = ACK_ASYNC<br>CMD 已受理但未完成，后续通过 EVENT 返回结果<br><br>`0B10` = ACK_FAILED<br>CMD / EVEVT 已收到，但遇到错误<br><br>`0B11` = Reserved - 暂未启用|
 | `B2…7` | `Reserved` | Reserved - 应设为 0 |
 
 #### 2.2.7 DataLen 定义
