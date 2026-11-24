@@ -73,8 +73,8 @@ Host                                    Device
 #### 2.2.5 Flags 定义（MsgType != ACK）
 | Bit(s) | Field | Description |
 |---|---|---|
-| `B0` | `ACK_Required` | 当前消息是否需要对方回复ACK<br>0 = 不需要<br>1 = 需要 |
-| `B1` | `Retransmit` | 当前消息是否为重传消息<br>0 = 否<br>1 = 是 |
+| `B0` | `ACK_Required` | 当前消息是否需要对方回复ACK<br>`0` = 不需要<br>`1` = 需要 |
+| `B1` | `Retransmit` | 当前消息是否为重传消息<br>`0` = 否<br>`1` = 是 |
 | `B2…7` | `Reserved` | Reserved - 应设为0 |
 
 (1) ACK_Required
@@ -90,7 +90,7 @@ Host                                    Device
 #### 2.2.6 ACK_Flags 定义（MsgType = ACK）
 | Bit(s) | Field | Description |
 |---|---|---|
-| `B0…1` | `ACK_Result` | `0B00` = ACK_OK CMD 已受理，且已完成/ EVENT 已处理<br>`0B01` = ACK_ASYNC CMD 已受理，后续通过 EVENT 返回结果<br>`0B10` = ACK_FAILED CMD / EVEVT 已收到，但无法处理|
+| `B0…1` | `ACK_Result` | `0B00` = ACK_OK<br>CMD 已受理，且已完成 / EVENT 已处理<br>`0B01` = ACK_ASYNC<br>CMD 已受理，后续通过 EVENT 返回结果<br>`0B10` = ACK_FAILED<br>CMD / EVEVT 已收到，但无法处理|
 | `B2…7` | `Reserved` | Reserved - 应设为0 |
 
 #### 2.2.7 DataLen 定义
