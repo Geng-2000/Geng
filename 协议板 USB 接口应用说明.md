@@ -15,6 +15,7 @@ USB 2.0 Full-Speed Device，CDC Class
 | `6` | `DataLen` | 2 Byte | Data长度，单位：byte，小端序 |
 | `8` | `Data` | N Byte | 业务数据 |
 | `8 + N` | `CRC16` | 2 Byte | 从 MsgID 到 Data 最后一个字节的 CRC-16/CCITT-FALSE 校验值，小端序 |
+>帧最大长度定义为 512 Byte，对应 Data 最大长度为 502 Byte
 
 ### 2.2 字段定义
 #### 2.2.1 SOF 定义
